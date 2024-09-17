@@ -94,3 +94,18 @@ mlb_df = read_excel("data/mlb11.xlsx", sheet = "mlb11")
 pulse_df = read_sas("data/public_pulse_data.sas7bdat")
 ```
 
+## Never use read.csv()
+
+```{r}
+litters_df = read_csv("data/FAS_litters.csv")
+```
+
+Never do this either:
+```{r}
+#dont use dollar signs#
+#look for column that starts with L, you are also taking data out of your dataset, which you should never do#
+litters_df$L
+```
+
+
+
