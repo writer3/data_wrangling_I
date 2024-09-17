@@ -6,4 +6,80 @@ output: github_document
 ```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
 ```
+
+
 This document will show how to import data
+
+## Import the FAS Litters CSV
+```{r}
+litters_df = read_csv("data/FAS_litters.csv")
+
+#janitor gets rid of special characters, replaces spaces with underscores, etc#
+litters_df = janitor::clean_names(litters_df)
+```
+
+### Look at the dataset
+
+```{r}
+ litters_df
+
+head(litters_df)
+tail(litters_df,10)
+```
+ 
+```{r eval= FALSE}
+view(litters_df)
+```
+
+## Import FAS pups
+
+```{r}
+pups_df = read_csv("data/FAS_pups.csv")
+
+pups_df = janitor::clean_names(pups_df)
+
+pups_df
+```
+
+## Look at read_csv options
+
+```{r}
+litters_df = 
+    read_csv(
+        file = "data/FAS_litters.csv",
+        col_names = FALSE,
+        skip = 1
+    )
+```
+
+
+What about the missing data
+
+```{r}
+litters_df 
+  read_csv(
+      file = "fata/FAS_litters.csv",
+      na = c("NA", "", ".")
+  )
+```
+
+
+What if we code `group` as a factor variable?
+
+```{r}
+litters_df = 
+    read_csv(
+        file = "data/FAS_litters.csv",
+        na = c("NA", "", "."),
+        col_types = cols(
+            Group = col_factor()
+        ) 
+    )
+```
+
+
+
+        )
+    )
+
+  )
