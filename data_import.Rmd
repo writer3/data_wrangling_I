@@ -5,6 +5,8 @@ output: github_document
 
 ```{r setup, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 
@@ -56,9 +58,9 @@ litters_df =
 What about the missing data
 
 ```{r}
-litters_df 
+litters_df =
   read_csv(
-      file = "fata/FAS_litters.csv",
+      file = "data/FAS_litters.csv",
       na = c("NA", "", ".")
   )
 ```
@@ -78,8 +80,17 @@ litters_df =
 ```
 
 
+## Import an excel file
 
-        )
-    )
+Import MLD 2011 summary data.
 
-  )
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx", sheet = "mlb11")
+```
+
+## Import SAS data
+
+```{r}
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+```
+
