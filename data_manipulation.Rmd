@@ -23,3 +23,61 @@ pups_df =
 pups_df = janitor::clean_names(pups_df)
 ```
 
+## 'select'
+
+Use 'select()' to select variables
+
+```{r}
+select(litters_df, group, litter_number, gd0_weight)
+```
+
+```{r}
+select(litters_df, group:gd18_weight)
+```
+
+#getting rid of pups_survive column#
+```{r}
+select(litters_df, -pups_survive)
+```
+
+
+```{r}
+#getting rid of every column from group to gd18_weight#
+select(litters_df, -group:gd18_weight)
+```
+
+```{r}
+select(litters_df, starts_with("gd"))
+
+select(litters_df,contains("pups"))
+```
+
+```{r}
+select(litters_df,GROUP = group)
+
+#keep everything but rename the group to GROUP variable#
+rename(litters_df, GROUP = group)
+
+#puts litter_number and gd0_weight first and keep everything#
+select(litters_df, litter_number, gd0_weight, everything())
+
+#relocates variables, and keeps everything else#
+relocate(litters_df, litter_number, gd0_weight)
+```
+
+
+
+
+
+
+
+
+## 'filter'
+
+## 'mutate'
+
+## 'arrange'
+
+
+
+## PIPING
