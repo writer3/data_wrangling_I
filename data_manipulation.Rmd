@@ -133,11 +133,18 @@ mutate(
 )
 ```
 
-
-
-
-
 ## 'arrange'
+
+```{r}
+#increasing order of gd0_weight
+arrange(litters_df, gd0_weight)
+
+#arrange by decreasing order of gd0_weight
+arrange(litters_df, desc(gd0_weight))
+
+#arrange multiple things at once
+arrange(litters_df, pups_born_alive, gd0_weight)
+```
 
 
 
