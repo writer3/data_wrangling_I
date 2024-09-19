@@ -81,7 +81,7 @@ select(litters_df, group:gd18_weight)
     ## 10 Con8  #3/5/2/2/95           28.5        NA  
     ## # ℹ 39 more rows
 
-\#getting rid of pups_survive column#
+getting rid of pups_survive column
 
 ``` r
 select(litters_df, -pups_survive)
@@ -103,8 +103,9 @@ select(litters_df, -pups_survive)
     ## # ℹ 39 more rows
     ## # ℹ 1 more variable: pups_dead_birth <dbl>
 
+getting rid of every column from group to gd18_weight
+
 ``` r
-#getting rid of every column from group to gd18_weight#
 select(litters_df, -group:gd18_weight)
 ```
 
@@ -244,6 +245,27 @@ relocate(litters_df, litter_number, gd0_weight)
     ## 10 #3/5/2/2/95           28.5 Con8         NA            20               8
     ## # ℹ 39 more rows
     ## # ℹ 2 more variables: pups_dead_birth <dbl>, pups_survive <dbl>
+
+Learning assessment
+
+``` r
+select(pups_df, litter_number, sex, pd_ears)
+```
+
+    ## # A tibble: 313 × 3
+    ##    litter_number   sex pd_ears
+    ##    <chr>         <dbl>   <dbl>
+    ##  1 #85               1       4
+    ##  2 #85               1       4
+    ##  3 #1/2/95/2         1       5
+    ##  4 #1/2/95/2         1       5
+    ##  5 #5/5/3/83/3-3     1       5
+    ##  6 #5/5/3/83/3-3     1       5
+    ##  7 #5/4/2/95/2       1      NA
+    ##  8 #4/2/95/3-3       1       4
+    ##  9 #4/2/95/3-3       1       4
+    ## 10 #2/2/95/3-2       1       4
+    ## # ℹ 303 more rows
 
 ## ‘filter’
 

@@ -35,14 +35,13 @@ select(litters_df, group, litter_number, gd0_weight)
 select(litters_df, group:gd18_weight)
 ```
 
-#getting rid of pups_survive column#
+getting rid of pups_survive column
 ```{r}
 select(litters_df, -pups_survive)
 ```
 
-
+getting rid of every column from group to gd18_weight
 ```{r}
-#getting rid of every column from group to gd18_weight#
 select(litters_df, -group:gd18_weight)
 ```
 
@@ -65,6 +64,10 @@ select(litters_df, litter_number, gd0_weight, everything())
 relocate(litters_df, litter_number, gd0_weight)
 ```
 
+Learning assessment
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
 
 
 
