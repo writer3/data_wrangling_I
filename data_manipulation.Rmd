@@ -179,7 +179,8 @@ litters_df =
   select(-pups_born_alive) |> 
   filter(group == "Con7") |> 
   mutate(
-    wt_gain = gd18_weight - gd0_weight,
+    wt_gain = 
+      gd18_weight - gd0_weight,
     group = str_to_lower(group)
   )
 ```
