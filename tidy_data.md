@@ -1,7 +1,7 @@
 Tidy Data
 ================
 
-This document will
+This document will show how to tidy data.
 
 ## Pivot Longer
 
@@ -107,3 +107,67 @@ lotr_df =
   relocate(movie) |> #relocates column "movie" to the first column
   mutate(race = str_to_lower(race)) #changes race to lower case
 ```
+
+## Join FAS datasets
+
+Import `litters` dataset.
+
+``` r
+litters_df = 
+  read_csv("data/FAS_litters.csv", na = c("NA", ".", "")) |> 
+  janitor::clean_names() |> 
+  mutate(
+    wt_gain = gd18_weight - gd0_weight
+  ) |> 
+  separate(
+    group , into = c("dose", "day_of_treatment"), sep = 3 #separate after 3 characters, can also ask it to look for a space or other special character
+  )
+```
+
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Import `pups` next!
+
+``` r
+pups_df = 
+  read_csv("data/FAS_pups.csv", na = c("NA", ".", "")) |> 
+  janitor::clean_names() |> 
+  mutate(
+    sex = case_match( #change the sex from 1 and 2 to male and female
+      sex,
+      1 ~ "male",
+      2 ~ "female"
+    )
+  )
+```
+
+    ## Rows: 313 Columns: 6
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (1): Litter Number
+    ## dbl (5): Sex, PD ears, PD eyes, PD pivot, PD walk
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+Join the datasets!
+
+``` r
+fas_df = 
+  left_join(pups_df, litters_df, by = "litter_number") |> 
+  relocate(litter_number, dose, day_of_treatment) #reorder the columns starting with these as the first three in this order
+```
+
+Do final example on course website that includes the Learning
+Assessment.
+
+anti_join - is there anything that exists in one dataset that is not in
+the other this is an important step to make sure that once datasets are
+joined, you’re checking is everyone here.
