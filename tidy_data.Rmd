@@ -7,6 +7,10 @@ output: github_document
 library(tidyverse)
 ```
 
+This document will
+
+## Pivot Longer
+
 ```{r}
 pulse_df = 
   haven::read_sas("data/public_pulse_data.sas7bdat") |> 
@@ -41,4 +45,29 @@ litters_df =
         "gd18_weight" ~ 18
     ))
 ```
+
+## Pivot wider
+
+Let's make up an analysis result table.
+
+```{r}
+analysis_df = 
+  tibble(
+    group = c("treatment", "treatment", "control", "control"),
+    time  = c("pre", "post", "pre", "post"),
+    mean = c(4, 10, 4.2, 5)
+  )
+```
+
+Pivot wider for human readability
+
+```{r}
+analysis_df |> 
+  pivot_wider(
+    names_from = time, #which column name are you using
+    values_from = mean, #where are the values for that column coming from? the mean variable
+  ) |> 
+  knitr::kable() #almost always use this as a final step if someone will read the table
+```
+
 
