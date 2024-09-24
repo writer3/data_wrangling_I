@@ -147,5 +147,9 @@ Do final example on course website that includes the Learning Assessment.
 anti_join - is there anything that exists in one dataset that is not in the other
 this is an important step to make sure that once datasets are joined, you're checking is everyone here. 
 
+HW2
+- problem 1 tests data import on NYC transit
+- problem 2 import the dataset and figure out what's going on
+- problem 3 great british bake off
 
 
