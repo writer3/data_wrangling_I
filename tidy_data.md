@@ -7,7 +7,7 @@ This document will
 
 ``` r
 pulse_df = 
-  haven::read_sas("data/public_pulse_data.sas7bdat") |> 
+  read_sas("data/public_pulse_data.sas7bdat") |> 
   janitor::clean_names() |> 
   pivot_longer(
       cols = bdi_score_bl:bdi_score_12m,
@@ -70,10 +70,40 @@ analysis_df |>
     names_from = time, #which column name are you using
     values_from = mean, #where are the values for that column coming from? the mean variable
   ) |> 
-  knitr::kable()
+  knitr::kable() #almost always use this as a final step if someone will read the table
 ```
 
 | group     | pre | post |
 |:----------|----:|-----:|
 | treatment | 4.0 |   10 |
 | control   | 4.2 |    5 |
+
+## Bind tables.
+
+``` r
+fellowship_ring = 
+  read_excel("./data/LotR_Words.xlsx", range = "B3:D6") |>
+  mutate(movie = "fellowship_ring")
+
+
+two_towers = 
+  read_excel("./data/LotR_Words.xlsx", range = "F3:H6") |>
+  mutate(movie = "two_towers")
+
+
+return_king = 
+  read_excel("./data/LotR_Words.xlsx", range = "J3:L6") |>
+  mutate(movie = "return_king")
+
+
+lotr_df = 
+  bind_rows(fellowship_ring, two_towers, return_king) |> 
+  janitor::clean_names() |> 
+  pivot_longer(
+    cols = female:male,
+    names_to = "sex",
+    values_to = "words"
+  ) |> 
+  relocate(movie) |> #relocates column "movie" to the first column
+  mutate(race = str_to_lower(race)) #changes race to lower case
+```
