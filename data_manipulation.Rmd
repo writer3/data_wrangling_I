@@ -166,7 +166,6 @@ litters_with_filter = filter(litters_df_var, group == "Con7")
 
 definitely don't do this (nesting within one line of code)!
 
-```{r}
 filter(select(janitor::clean_names(read_csv("data/FAS_litters.csv", na = c(NA", "", ".") etc...
 ```
 
@@ -187,9 +186,9 @@ litters_df =
 
 Pipe with the thing isn't the first argument.
 
-na is a combination of "NA", ".", ""
 ```{r}
-read_csv(data"data/FAS_litters.csv", na = c("NA", ".", "")) |> 
+litters_df = 
+  read_csv("data/FAS_litters.csv", na = c("NA", ".", "")) |> 
   janitor::clean_names() |> 
   mutate(wt_gain = gd18_weight - gd0_weight) |> 
   lm(wt_gain ~ pups_born_aive, data = _)
@@ -209,7 +208,6 @@ litters_df =
   )
 
 write_csv(litters_df, "data/cleaned_fas_litters.csv")
-```
 ```
 
 
